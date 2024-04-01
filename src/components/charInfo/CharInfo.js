@@ -8,6 +8,7 @@ import Skeleton from '../skeleton/Skeleton'
 
 import './charInfo.scss';
 import useMarvelService from '../../services/MarvelService';
+import { Link } from 'react-router-dom';
 
 const CharInfo = (props) => {
     const [char,setChar] = useState(null)
@@ -51,7 +52,7 @@ const CharInfo = (props) => {
 
 
 const View = ({char}) => {
-    const {name,description,thumbnail,homepage,wiki,comics} = char;
+    const {name,description,thumbnail,homepage,wiki,comics,resourceURI} = char;
     let imgStyle = {'objectFit' : 'cover'};
     if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
         imgStyle = {'objectFit' : 'contain'};
@@ -80,9 +81,13 @@ const View = ({char}) => {
                     {comics.lengh > 0 ? null : 'There is no comics with this character'}
                     {
                         comics.slice(0,10).map((item,i) => {
+                            console.log(resourceURI)
                             return (
                                 <li key={i} className="char__comics-item">
-                                {item.name}
+                                <Link to={`/comics/${resourceURI.slice(47,54)}`}>
+                                    {item.name} 
+                                        
+                                </Link>
                                 </li>
                             )
                         })

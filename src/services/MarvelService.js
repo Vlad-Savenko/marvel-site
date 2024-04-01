@@ -27,7 +27,7 @@ const useMarvelService = () => {
 		return res.data.results.map(_transformComics);
 	};
 
-	const getComics = async (id) => {
+	const getComic = async (id) => {
 		const res = await request(`${_apiBase}comics/${id}?${_apiKey}`);
 		return _transformComics(res.data.results[0]);
 	};
@@ -43,8 +43,13 @@ const useMarvelService = () => {
 			homepage: char.urls[0].url,
 			wiki: char.urls[1].url,
 			comics: char.comics.items,
+			resourceURI: char.comics.collectionURI
 		};
 	};
+
+	// const _transformComic = (comic) = > {
+
+	// }
 
 	const _transformComics = (comics) => {
 		return {
@@ -70,7 +75,7 @@ const useMarvelService = () => {
 		getAllCharacters,
 		getCharacter,
 		getAllComics,
-		getComics,
+		getComic,
 	};
 };
 
